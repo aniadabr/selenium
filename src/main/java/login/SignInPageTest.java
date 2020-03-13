@@ -35,4 +35,22 @@ public class SignInPageTest {
         driver.findElement(By.id("SubmitLogin")).click();
         driver.findElement(By.className("info-account"));
     }
+
+    @Test
+    public void failedNoPasswordSignIn() {
+        driver.get("http://automationpractice.com/index.php?controller=authentication&back=identity");
+        driver.findElement(By.id("email")).sendKeys("xogaxi7692@mailboxt.net");
+        driver.findElement(By.id("SubmitLogin")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/div[3]/div/div[1]\n"));
+
+    }
+
+    @Test
+
+    public void failedNoEmailSignIn(){
+        driver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        driver.findElement(By.id("passwd")).sendKeys("Test_123");
+        driver.findElement(By.id("SubmitLogin")).click();
+        driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/div[3]/div/div[1]\n"));
+    }
 }
