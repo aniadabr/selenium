@@ -18,6 +18,7 @@ public class SignInPageTest {
     public void setUp() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
     }
 
     @After
@@ -28,8 +29,6 @@ public class SignInPageTest {
 
     @Test
     public void successSignIn() {
-        driver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
-
         driver.findElement(By.id("email")).sendKeys("xogaxi7692@mailboxt.net");
         driver.findElement(By.id("passwd")).sendKeys("Test_123");
         driver.findElement(By.id("SubmitLogin")).click();
@@ -38,7 +37,6 @@ public class SignInPageTest {
 
     @Test
     public void failedNoPasswordSignIn() {
-        driver.get("http://automationpractice.com/index.php?controller=authentication&back=identity");
         driver.findElement(By.id("email")).sendKeys("xogaxi7692@mailboxt.net");
         driver.findElement(By.id("SubmitLogin")).click();
         driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/div[3]/div/div[1]\n"));
@@ -47,10 +45,30 @@ public class SignInPageTest {
 
     @Test
 
-    public void failedNoEmailSignIn(){
-        driver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
+    public void failedNoEmailSignIn() {
         driver.findElement(By.id("passwd")).sendKeys("Test_123");
         driver.findElement(By.id("SubmitLogin")).click();
         driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/div[3]/div/div[1]\n"));
+    }
+
+    @Test
+    public void emailWotoutAt(){
+        driver.findElement(By.id("email")).sendKeys("xogaxi7692mailboxt.net");
+        driver.findElement(By.id("passwd")).sendKeys("Test_123");
+        driver.findElement(By.id("SubmitLogin")).click();
+
+        WebElement wrongEmail = driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/div[3]/div/div[1]/ol/li\n"));
+        Assert.assertTrue(wrongEmail.getText().contains("Invalid email address."));
+
+    }
+
+    @Test
+    public void goodEmailWrongPassword (){
+        driver.findElement(By.id("email")).sendKeys("xogaxi7692@mailboxt.net");
+        driver.findElement(By.id("passwd")).sendKeys("test_123");
+        driver.findElement(By.id("SubmitLogin")).click();
+
+        WebElement wrongPassword = driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/div[3]/div/div[1]/ol/li\n"));
+        Assert.assertTrue(wrongPassword.getText().contains("Authentication failed."));
     }
 }
