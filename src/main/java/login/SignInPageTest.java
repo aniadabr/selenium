@@ -52,7 +52,7 @@ public class SignInPageTest {
     }
 
     @Test
-    public void emailWotoutAt(){
+    public void emailWithoutAt(){
         driver.findElement(By.id("email")).sendKeys("xogaxi7692mailboxt.net");
         driver.findElement(By.id("passwd")).sendKeys("Test_123");
         driver.findElement(By.id("SubmitLogin")).click();
@@ -63,7 +63,7 @@ public class SignInPageTest {
     }
 
     @Test
-    public void goodEmailWrongPassword (){
+    public void goodEmailWrongPassword () {
         driver.findElement(By.id("email")).sendKeys("xogaxi7692@mailboxt.net");
         driver.findElement(By.id("passwd")).sendKeys("test_123");
         driver.findElement(By.id("SubmitLogin")).click();

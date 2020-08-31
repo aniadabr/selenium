@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class CustomizeItem {
+public class CustomizeItemTest {
 
     WebDriver driver;
     WebDriverWait wait;
